@@ -1,3 +1,25 @@
+//encode abcdefg to gafbdec
+byte encodeOredred(byte in)
+{
+    byte a = bitRead(in, 6) << 5;
+    byte b = bitRead(in, 5) << 3;
+    byte c = bitRead(in, 4) << 0;
+    byte d = bitRead(in, 3) << 2;
+    byte e = bitRead(in, 2) << 1;
+    byte f = bitRead(in, 1) << 4;
+    byte g = bitRead(in, 0) << 6;
+    byte out = 0;
+    out |= a;
+    out |= b;
+    out |= c;
+    out |= d;
+    out |= e;
+    out |= f;
+    out |= g;
+    // byte out = a || b || c || d || e || f || g;
+    return out;
+}
+
 class display
 {
 public:
@@ -52,7 +74,7 @@ public:
         Wire.write(byte(startDigit + 1)); //digit's commands are 1init
         for (int i = 0, len = endDigit - startDigit; i <= len; i++)
         {
-            Wire.write(dataIn[i]);
+            Wire.write(encodeOredred(dataIn[i]));
         }
         Wire.endTransmission();
     }
@@ -109,16 +131,16 @@ const byte segments[128] = {B00000000,  //0
                             B00000000,  //45   -
                             B00000000,  //46   .
                             B00000000,  //47   /
-                            B00111111,  //48   0
-                            B00001001,  //49   1
-                            B01101110,  //50   2
-                            B01101101,  //51   3
-                            B01011001,  //52   4
-                            B01110101,  //53   5
-                            B01110111,  //54   6
-                            B00101001,  //55   7
+                            B01111110,  //48   0
+                            B00110000,  //49   1
+                            B01101101,  //50   2
+                            B01111001,  //51   3
+                            B00110011,  //52   4
+                            B01011011,  //53   5
+                            B01011111,  //54   6
+                            B01110000,  //55   7
                             B01111111,  //56   8
-                            B01111101,  //57   9
+                            B01111011,  //57   9
                             B00000000,  //58   :
                             B00000000,  //59   ;
                             B00000000,  //60   <

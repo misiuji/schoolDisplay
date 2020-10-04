@@ -60,7 +60,7 @@ public:
 private:
     byte current; //the drive current; bits are (right to left): 12mA, 6mA, 3mA
 };
-
+//lookup for segments in format -gafbaec
 const byte segments[128] = {B00000000,  //0
                             B00000000,  //1
                             B00000000,  //2
